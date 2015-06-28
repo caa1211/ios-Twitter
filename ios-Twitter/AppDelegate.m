@@ -11,6 +11,7 @@
 #import "TwitterClient.h"
 #import "User.h"
 #import "Tweet.h"
+#import "TweetsViewController.h"
 
 @interface AppDelegate ()
 
@@ -21,9 +22,26 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = [[LoginViewController alloc]init];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLogout) name:UserDidLogoutNotification object:nil];
+    
+    User *user = [User currentUser];
+    if (user != nil) {
+        NSLog(@"welcome: %@", user.name);
+        self.window.rootViewController = [[TweetsViewController alloc]init];
+    }else {
+        NSLog(@"No logged in");
+        self.window.rootViewController = [[LoginViewController alloc]init];
+    }
+
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+-(void) userDidLogout{
+    self.window.rootViewController = [[LoginViewController alloc]init];
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

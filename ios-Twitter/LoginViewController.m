@@ -8,7 +8,7 @@
 
 #import "LoginViewController.h"
 #import "TwitterClient.h"
-
+#import "TweetsViewController.h"
 @interface LoginViewController ()
 
 @end
@@ -19,6 +19,8 @@
     [[TwitterClient sharedInstance] loginWithCompletion:^(User *user, NSError *error) {
         if (user != nil) {
             NSLog(@"User %@ loggin", user.name);
+            [User setCurrentUser:user];
+            [self presentViewController: [[TweetsViewController alloc] init] animated:YES completion:nil];
         }else {
             // Present error view;
         }
