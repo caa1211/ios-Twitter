@@ -60,3 +60,21 @@
 #define COCOAPODS_VERSION_MINOR_FontAwesomeIconFactory 0
 #define COCOAPODS_VERSION_PATCH_FontAwesomeIconFactory 0
 
+// HexColors
+#define COCOAPODS_POD_AVAILABLE_HexColors
+#define COCOAPODS_VERSION_MAJOR_HexColors 2
+#define COCOAPODS_VERSION_MINOR_HexColors 2
+#define COCOAPODS_VERSION_PATCH_HexColors 1
+
+// TSMessages
+#define COCOAPODS_POD_AVAILABLE_TSMessages
+#define COCOAPODS_VERSION_MAJOR_TSMessages 0
+#define COCOAPODS_VERSION_MINOR_TSMessages 9
+#define COCOAPODS_VERSION_PATCH_TSMessages 12
+
+// UIScrollView-InfiniteScroll
+#define COCOAPODS_POD_AVAILABLE_UIScrollView_InfiniteScroll
+#define COCOAPODS_VERSION_MAJOR_UIScrollView_InfiniteScroll 0
+#define COCOAPODS_VERSION_MINOR_UIScrollView_InfiniteScroll 7
+#define COCOAPODS_VERSION_PATCH_UIScrollView_InfiniteScroll 2
+

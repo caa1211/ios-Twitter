@@ -16,6 +16,7 @@
 @property(nonatomic, strong) User *user;
 @property(nonatomic, strong) NSString *timestamp;
 @property(nonatomic, strong) NSString *mediaUrl;
+@property (nonatomic, strong) NSString *idStr;
 
 -(id)initWithDictionary: (NSDictionary *)dictionary;
 +(NSArray *) tweetsWithArray: (NSArray *) array;

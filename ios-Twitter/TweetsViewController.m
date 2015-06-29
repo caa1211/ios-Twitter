@@ -11,11 +11,13 @@
 #import "Tweet.h"
 #import "TwitterClient.h"
 #import "TweetCell.h"
+#import <UIScrollView+InfiniteScroll.h>
+#import <TSMessage.h>
 
 @interface TweetsViewController () <UITableViewDataSource, UITableViewDelegate>
 //@property (nonatomic, strong) UINavigationController *naviController;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSArray *tweets;
+@property (strong, nonatomic) NSMutableArray *tweets;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @end
 
@@ -25,19 +27,25 @@ enum {
 
 @implementation TweetsViewController
 
-//- (void)viewWillAppear:(BOOL)animated {
-//    // Fix height of cell be strange after filter view closing
-//    [super viewWillAppear:animated];
-//    self.tableView.estimatedRowHeight = 100.0; // for example. Set your average height
-//    self.tableView.rowHeight = UITableViewAutomaticDimension;
-//}
+- (void)viewWillAppear:(BOOL)animated {
+    // Fix height of cell be strange after filter view closing
+    [super viewWillAppear:animated];
+    self.tableView.estimatedRowHeight = 100.0; // for example. Set your average height
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [[TwitterClient sharedInstance] homeTimelineWithParams:nil completion:^(NSArray *tweets, NSError *error) {
-        self.tweets = tweets;
-        [self.tableView reloadData];
+        if (tweets == nil){
+            [TSMessage showNotificationWithTitle:@"Newtork Error"
+                                        subtitle:@"Please check your connection and try again later"
+                                            type:TSMessageNotificationTypeWarning];
+        }else{
+            self.tweets = [[NSMutableArray alloc] initWithArray: tweets];
+            [self.tableView reloadData];
+        }
     }];
     
     self.tableView.delegate = self;
@@ -58,8 +66,39 @@ enum {
     [self.navigationController.navigationBar setBarTintColor:[[UIColor alloc] initWithRed:0.298 green:0.646 blue:0.920 alpha:1.000]];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"TweetCell" bundle:nil] forCellReuseIdentifier:@"TweetCell"];
-     [self initRefreshControl];
+    [self initRefreshControl];
+    [self initInfiniteScroll];
 }
+
+- (void) initInfiniteScroll {
+    [self.tableView addInfiniteScrollWithHandler:^(UITableView* tableView) {
+        [self loadMoreTweetsWithCompletionHandler:^{
+             [self.tableView finishInfiniteScroll];
+        }];
+    }];
+}
+
+- (void)loadMoreTweetsWithCompletionHandler:(void (^)(void))completionHandler {
+    NSString *lastTweetIdStr = ((Tweet *)[self.tweets lastObject]).idStr;
+    long long maxIdToLoad = [lastTweetIdStr longLongValue] - 1;
+    
+    [[TwitterClient sharedInstance] homeTimelineWithParams:@{@"max_id": [@(maxIdToLoad) stringValue]} completion:^(NSArray *tweets, NSError *error) {
+
+        if (tweets.count > 0) {
+            NSInteger cNumTweets = self.tweets.count;
+            //self.tweets = [self.tweets arrayByAddingObjectsFromArray:tweets];
+            [self.tweets addObjectsFromArray:tweets];
+            NSMutableArray *newIndexPaths = [NSMutableArray array];
+            for (NSInteger i = cNumTweets; i < self.tweets.count; i++) {
+                [newIndexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+            }
+            [self.tableView insertRowsAtIndexPaths:newIndexPaths withRowAnimation:UITableViewRowAnimationNone];
+        }
+        completionHandler();
+    }];
+    
+}
+
 
 - (void) initRefreshControl {
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -74,10 +113,10 @@ enum {
 - (void)refreshData{
     [[TwitterClient sharedInstance] homeTimelineWithParams:nil completion:^(NSArray *tweets, NSError *error) {
         if (tweets!=nil) {
-            self.tweets = tweets;
+            [self.tweets removeAllObjects];
+            [self.tweets addObjectsFromArray:tweets];
             [self.tableView reloadData];
         }
-       
         
         //End the refreshing
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -149,7 +188,6 @@ enum {
     lineView.backgroundColor = [UIColor colorWithRed:224/255.0 green:224/255.0 blue:224/255.0 alpha:1.0];
     [view addSubview:lineView];
 
-    
     return view;
 }
 

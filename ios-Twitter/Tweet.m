@@ -18,6 +18,7 @@
        
         self.user = [[User alloc] initWithDictionary: dictionary[@"user"]];
         self.text = dictionary[@"text"];
+        self.idStr = dictionary[@"id_str"];
 
         @try {
             self.mediaUrl = dictionary[@"entities"][@"media"][0][@"media_url"];
@@ -30,7 +31,7 @@
         self.createdAt = [formatter dateFromString:createAtString];
         self.timestamp = [self compareCurrentTime:self.createdAt];
         
-         NSLog(@"%@", self.mediaUrl);
+        // NSLog(@"%@", self.mediaUrl);
     }
     return self;
     

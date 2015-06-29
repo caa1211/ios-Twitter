@@ -34,7 +34,7 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4vc-5r-JNI">
-                    <rect key="frame" x="135" y="97" width="50" height="50"/>
+                    <rect key="frame" x="135" y="107" width="50" height="50"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50" id="dhx-Tg-AtL"/>
                         <constraint firstAttribute="height" constant="50" id="ogu-m7-lFP"/>
@@ -47,7 +47,7 @@
                 <constraint firstAttribute="bottom" secondItem="mQV-X2-ESH" secondAttribute="bottom" id="Jw4-IY-h23"/>
                 <constraint firstAttribute="centerX" secondItem="zfs-NB-Hbf" secondAttribute="centerX" id="McR-CY-CIz"/>
                 <constraint firstAttribute="trailing" secondItem="mQV-X2-ESH" secondAttribute="trailing" id="Oee-o6-Hlo"/>
-                <constraint firstAttribute="centerY" secondItem="4vc-5r-JNI" secondAttribute="centerY" constant="162" id="RKa-3a-hz7"/>
+                <constraint firstAttribute="centerY" secondItem="4vc-5r-JNI" secondAttribute="centerY" constant="152" id="RKa-3a-hz7"/>
                 <constraint firstAttribute="trailing" secondItem="zfs-NB-Hbf" secondAttribute="trailing" id="UcN-Om-oze"/>
                 <constraint firstItem="mQV-X2-ESH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="YCP-WP-H6G"/>
                 <constraint firstAttribute="bottom" secondItem="zfs-NB-Hbf" secondAttribute="bottom" id="YFw-Gd-EDb"/>

@@ -5,6 +5,8 @@ target 'ios-Twitter' do
     pod "BDBOAuth1Manager"
     pod "FontAwesomeIconFactory"
     pod "AFNetworking"
+    pod "UIScrollView-InfiniteScroll"
+    pod "TSMessages"
 end
 
 target 'ios-TwitterTests' do

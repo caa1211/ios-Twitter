@@ -88,7 +88,7 @@
 
 - (void)prepareForReuse {
     [super prepareForReuse];
-    self.profileImage = nil;
+    self.profileImage.image = nil;
 }
 
 @end

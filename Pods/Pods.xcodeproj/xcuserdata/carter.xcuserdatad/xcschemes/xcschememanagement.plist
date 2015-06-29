@@ -19,6 +19,21 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-ios-Twitter-HexColors.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-ios-Twitter-TSMessages.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-ios-Twitter-UIScrollView-InfiniteScroll.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-ios-Twitter.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,22 +42,37 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>356BFEDA36677874DBFBEF19</key>
+		<key>0B082CD4A74CD988C0A18476</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>403C5943A2B9C516F6A6A76F</key>
+		<key>0E8EC91461237571FE9EACAB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7C1A54C38AE239EA5F2DEC8F</key>
+		<key>268617309339069C51F6FB45</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EC00C8D9FA3FF24EE4A06F7E</key>
+		<key>4608084A313FF40AADB03E28</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>925E812840E998BF37C03C83</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E6FD52CD291A4F1333140E98</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EE4ABE3B30D278C9D0D31EDA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

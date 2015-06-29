@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "EC00C8D9FA3FF24EE4A06F7E"
+               BlueprintIdentifier = "4608084A313FF40AADB03E28"
                BuildableName = "libPods-ios-Twitter-FontAwesomeIconFactory.a"
                BlueprintName = "Pods-ios-Twitter-FontAwesomeIconFactory"
                ReferencedContainer = "container:Pods.xcodeproj">
