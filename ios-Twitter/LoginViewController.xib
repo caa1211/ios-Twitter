@@ -34,10 +34,10 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4vc-5r-JNI">
-                    <rect key="frame" x="135" y="107" width="50" height="50"/>
+                    <rect key="frame" x="130" y="102" width="60" height="60"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="50" id="dhx-Tg-AtL"/>
-                        <constraint firstAttribute="height" constant="50" id="ogu-m7-lFP"/>
+                        <constraint firstAttribute="width" constant="60" id="dhx-Tg-AtL"/>
+                        <constraint firstAttribute="height" constant="60" id="ogu-m7-lFP"/>
                     </constraints>
                 </imageView>
             </subviews>

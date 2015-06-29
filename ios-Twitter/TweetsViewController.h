@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "User.h"
 @interface TweetsViewController : UIViewController
-
+-(id) initWithUser:(User*)user;
 @end

@@ -10,4 +10,19 @@
 
 @implementation Define
 
++ (UIImage *) fontImage:(NIKFontAwesomeIcon)icon rgbaValue:(unsigned)rgbaValue {
+
+    NIKFontAwesomeIconFactory *factory = [NIKFontAwesomeIconFactory barButtonItemIconFactory];
+    [factory setColors:@[ UIColorFromRGB(rgbaValue)]];
+    UIImage *image =  [factory createImageForIcon:icon];
+    return image;
+}
+
++ (UIImage *) fontImage:(NIKFontAwesomeIcon)icon{
+    NIKFontAwesomeIconFactory *factory = [NIKFontAwesomeIconFactory barButtonItemIconFactory];
+    UIImage *image =  [factory createImageForIcon:icon];
+    return image;
+}
+
+
 @end

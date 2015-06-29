@@ -13,12 +13,14 @@
 #import "TweetCell.h"
 #import <UIScrollView+InfiniteScroll.h>
 #import <TSMessage.h>
+#import "ComposeTweetViewController.h"
 
-@interface TweetsViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface TweetsViewController () <UITableViewDataSource, UITableViewDelegate, ComposeTweetViewControllerDelegate>
 //@property (nonatomic, strong) UINavigationController *naviController;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *tweets;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) User *loginUser;
 @end
 
 enum {
@@ -32,6 +34,14 @@ enum {
     [super viewWillAppear:animated];
     self.tableView.estimatedRowHeight = 100.0; // for example. Set your average height
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+}
+
+- (id) initWithUser: (User *)user{
+    self = [super init];
+    if (self) {
+        self.loginUser = user;
+    }
+    return self;
 }
 
 - (void)viewDidLoad {
@@ -53,11 +63,18 @@ enum {
 
     self.title = @"Home";
 
-    UIBarButtonItem *logoutBtn = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:self action:@selector(onLogout)];
-    [logoutBtn setTitleTextAttributes: @{NSForegroundColorAttributeName:[UIColor whiteColor] } forState:UIControlStateNormal];
     
-    UIBarButtonItem *newBtn = [[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStylePlain target:self action:@selector(onNew)];
-    [newBtn setTitleTextAttributes: @{NSForegroundColorAttributeName:[UIColor whiteColor] } forState:UIControlStateNormal];
+//    UIBarButtonItem *logoutBtn = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:self action:@selector(onLogout)];
+//    [logoutBtn setTitleTextAttributes: @{NSForegroundColorAttributeName:[UIColor whiteColor] } forState:UIControlStateNormal];
+//    
+//    UIBarButtonItem *newBtn = [[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStylePlain target:self action:@selector(onNew)];
+//    [newBtn setTitleTextAttributes: @{NSForegroundColorAttributeName:[UIColor whiteColor] } forState:UIControlStateNormal];
+    
+    UIImage *logoutImg = [Define fontImage:NIKFontAwesomeIconUserTimes rgbaValue:0xffffff];
+    UIBarButtonItem *logoutBtn = [[UIBarButtonItem alloc] initWithImage:logoutImg style:UIBarButtonItemStylePlain target:self action:@selector(onLogout)];
+    
+    UIImage *newImg = [Define fontImage:NIKFontAwesomeIconPencilSquareO rgbaValue:0xffffff];
+    UIBarButtonItem *newBtn = [[UIBarButtonItem alloc] initWithImage:newImg style:UIBarButtonItemStylePlain target:self action:@selector(onNew)];
     
     self.navigationItem.leftBarButtonItem = logoutBtn;
     self.navigationItem.rightBarButtonItem = newBtn;
@@ -141,7 +158,10 @@ enum {
 }
 
 - (void)onNew {
-    //TODO: onNew
+    ComposeTweetViewController *vc = [[ComposeTweetViewController alloc]initWithUser:self.loginUser];
+    vc.delegate = self;
+    [self presentViewController: [[UINavigationController alloc]
+                                  initWithRootViewController: vc] animated:YES completion:nil];
 }
 
 
@@ -209,6 +229,13 @@ enum {
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)didPostTweet:(Tweet *)tweet
+{
+    if (tweet !=nil) {
+        [self refreshData];
+    }
+}
 
 
 @end
