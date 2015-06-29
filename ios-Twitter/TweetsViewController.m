@@ -49,9 +49,10 @@ enum {
     
     [[TwitterClient sharedInstance] homeTimelineWithParams:nil completion:^(NSArray *tweets, NSError *error) {
         if (tweets == nil){
+            // NSString *errorMsg =  error.userInfo[@"NSLocalizedDescription"];
             [TSMessage showNotificationWithTitle:@"Newtork Error"
                                         subtitle:@"Please check your connection and try again later"
-                                            type:TSMessageNotificationTypeWarning];
+                                        type:TSMessageNotificationTypeWarning];
         }else{
             self.tweets = [[NSMutableArray alloc] initWithArray: tweets];
             [self.tableView reloadData];
@@ -160,8 +161,11 @@ enum {
 - (void)onNew {
     ComposeTweetViewController *vc = [[ComposeTweetViewController alloc]initWithUser:self.loginUser];
     vc.delegate = self;
-    [self presentViewController: [[UINavigationController alloc]
-                                  initWithRootViewController: vc] animated:YES completion:nil];
+    
+    UINavigationController *nvController = [[UINavigationController alloc]
+                              initWithRootViewController: vc];
+    // nvController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentViewController:nvController animated:YES completion:nil];
 }
 
 
