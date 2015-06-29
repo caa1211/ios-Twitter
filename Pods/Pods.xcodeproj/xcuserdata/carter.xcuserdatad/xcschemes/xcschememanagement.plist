@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-ios-Twitter-FontAwesomeIconFactory.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-ios-Twitter.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,17 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>716B20C4A771CBE948368EE1</key>
+		<key>356BFEDA36677874DBFBEF19</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A3F217950B9BDB29F9EE6CE7</key>
+		<key>403C5943A2B9C516F6A6A76F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B6820F2EBFA7D4E7E90FB24A</key>
+		<key>7C1A54C38AE239EA5F2DEC8F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EC00C8D9FA3FF24EE4A06F7E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

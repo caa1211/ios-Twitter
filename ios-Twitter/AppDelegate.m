@@ -22,14 +22,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
-    
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLogout) name:UserDidLogoutNotification object:nil];
     
     User *user = [User currentUser];
     if (user != nil) {
         NSLog(@"welcome: %@", user.name);
-        self.window.rootViewController = [[TweetsViewController alloc]init];
+        self.window.rootViewController = [[UINavigationController alloc]
+    initWithRootViewController: [[TweetsViewController alloc] init]];
     }else {
         NSLog(@"No logged in");
         self.window.rootViewController = [[LoginViewController alloc]init];

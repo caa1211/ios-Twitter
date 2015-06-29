@@ -10,19 +10,85 @@
 #import "User.h"
 #import "Tweet.h"
 #import "TwitterClient.h"
-@interface TweetsViewController ()
-- (IBAction)onLogout:(id)sender;
+#import "TweetCell.h"
 
+@interface TweetsViewController () <UITableViewDataSource, UITableViewDelegate>
+//@property (nonatomic, strong) UINavigationController *naviController;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSArray *tweets;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @end
+
+enum {
+    TimelineSection = 0
+};
 
 @implementation TweetsViewController
 
+//- (void)viewWillAppear:(BOOL)animated {
+//    // Fix height of cell be strange after filter view closing
+//    [super viewWillAppear:animated];
+//    self.tableView.estimatedRowHeight = 100.0; // for example. Set your average height
+//    self.tableView.rowHeight = UITableViewAutomaticDimension;
+//}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [[TwitterClient sharedInstance] homeTimelineWithParams:nil completion:^(NSArray *tweets, NSError *error) {
-        for (Tweet *tweet in tweets){
-            NSLog(@"text: %@", tweet.text);
+        self.tweets = tweets;
+        [self.tableView reloadData];
+    }];
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+
+    self.title = @"Home";
+
+    UIBarButtonItem *logoutBtn = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:self action:@selector(onLogout)];
+    [logoutBtn setTitleTextAttributes: @{NSForegroundColorAttributeName:[UIColor whiteColor] } forState:UIControlStateNormal];
+    
+    UIBarButtonItem *newBtn = [[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStylePlain target:self action:@selector(onNew)];
+    [newBtn setTitleTextAttributes: @{NSForegroundColorAttributeName:[UIColor whiteColor] } forState:UIControlStateNormal];
+    
+    self.navigationItem.leftBarButtonItem = logoutBtn;
+    self.navigationItem.rightBarButtonItem = newBtn;
+    
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    [self.navigationController.navigationBar setBarTintColor:[[UIColor alloc] initWithRed:0.298 green:0.646 blue:0.920 alpha:1.000]];
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"TweetCell" bundle:nil] forCellReuseIdentifier:@"TweetCell"];
+     [self initRefreshControl];
+}
+
+- (void) initRefreshControl {
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.backgroundColor = [UIColor colorWithRed:0.85 green:0.49 blue:0.47 alpha:1.0];
+    self.refreshControl.tintColor = [UIColor whiteColor];
+    [self.refreshControl addTarget:self
+                            action: @selector(refreshData)
+                  forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex: 0];
+}
+
+- (void)refreshData{
+    [[TwitterClient sharedInstance] homeTimelineWithParams:nil completion:^(NSArray *tweets, NSError *error) {
+        if (tweets!=nil) {
+            self.tweets = tweets;
+            [self.tableView reloadData];
         }
+       
+        
+        //End the refreshing
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"MMM d, h:mm a"];
+        NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
+        NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor whiteColor]
+                                                                    forKey:NSForegroundColorAttributeName];
+        NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
+        self.refreshControl.attributedTitle = attributedTitle;
+
+        [self.refreshControl endRefreshing];
     }];
 }
 
@@ -31,9 +97,69 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)onLogout:(id)sender {
+- (void)onLogout {
     [User logout];
+}
+
+- (void)onNew {
+    //TODO: onNew
+}
+
+
+#pragma mark - Table
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    NSInteger num = 0;
+    switch (section) {
+        case TimelineSection:
+        default:
+            num = self.tweets.count;
+            break;
+    }
+    return num;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
+
+    [cell setTweet:self.tweets[indexPath.row]];
     
+    return cell;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 50;
+}
+
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50)];
+    [view setBackgroundColor:[UIColor colorWithRed:0.951 green:0.965 blue:0.975 alpha:1.000]];
+    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 150, 50)];
+    [lbl setFont:[UIFont boldSystemFontOfSize:15]];
+    [lbl setTextColor:[UIColor grayColor]];
+    [view addSubview:lbl];
+    [lbl setText:[NSString stringWithFormat:@"%@", [self tableView:self.tableView titleForHeaderInSection:section]]];
+    
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 49, self.view.bounds.size.width, 1)] ;
+    lineView.backgroundColor = [UIColor colorWithRed:224/255.0 green:224/255.0 blue:224/255.0 alpha:1.0];
+    [view addSubview:lineView];
+
+    
+    return view;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    switch (section) {
+        case TimelineSection:
+        default:
+            return @"Timeline";
+            break;
+    }
 }
 
 /*

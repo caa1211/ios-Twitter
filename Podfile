@@ -3,6 +3,8 @@
 
 target 'ios-Twitter' do
     pod "BDBOAuth1Manager"
+    pod "FontAwesomeIconFactory"
+    pod "AFNetworking"
 end
 
 target 'ios-TwitterTests' do

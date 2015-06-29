@@ -25,14 +25,12 @@ NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
     
     if(self){
         self.name = dictionary[@"name"];
-        self.screenname = dictionary[@"screenname"];
+        self.screenname = dictionary[@"screen_name"];
         self.profileImageUrl = dictionary[@"profile_image_url"];
         self.tagline = dictionary[@"description"];
         self.dictionary = dictionary;
     }
-    
     return self;
-    
 }
 
 static User *_currentUser = nil;

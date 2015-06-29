@@ -10,7 +10,9 @@
 #import "TwitterClient.h"
 #import "TweetsViewController.h"
 @interface LoginViewController ()
-
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundView;
+@property (weak, nonatomic) IBOutlet UIImageView *twitterIcon;
+@property (strong, nonatomic) CABasicAnimation *fade;
 @end
 
 @implementation LoginViewController
@@ -20,18 +22,58 @@
         if (user != nil) {
             NSLog(@"User %@ loggin", user.name);
             [User setCurrentUser:user];
-            [self presentViewController: [[TweetsViewController alloc] init] animated:YES completion:nil];
+            //[self presentViewController: [[TweetsViewController alloc] init] animated:YES completion:nil];
+            [self presentViewController: [[UINavigationController alloc]
+                                          initWithRootViewController: [[TweetsViewController alloc] init]] animated:YES completion:nil];
+            
         }else {
             // Present error view;
         }
+    }];
+
+}
+
+- (UIImage *) loadImageforURLString:(NSString*)urlString {
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    UIImage *image = [UIImage imageWithData:data];
+    return image;
+}
+
+-(void) loadBackgroundImage{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        UIImage *image = [self loadImageforURLString: @"https://farm3.staticflickr.com/2911/14178966435_abe4f2b16a_b.jpg"];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.backgroundView.image = image;
+            
+            [self.twitterIcon.layer addAnimation:self.fade forKey:@"fade"];
+            [self.twitterIcon setAlpha:1.0];
+            [self.backgroundView.layer addAnimation:self.fade forKey:@"fade"];
+        });
+    });
+}
+
+- (void)rotateImageView:(UIImageView*)imageView angle:(CGFloat)angle
+{
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+        [imageView setTransform:CGAffineTransformRotate(imageView.transform, angle)];
+    }completion:^(BOOL finished){
     }];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    [self loadBackgroundImage];
     
-    // Do any additional setup after loading the view from its nib.
+    self.twitterIcon.image = [UIImage imageNamed:@"Twitter_logo_blue_48.png" ];
+
+    self.fade = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    self.fade.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    self.fade.fromValue = [NSNumber numberWithFloat:0.0f];
+    self.fade.toValue = [NSNumber numberWithFloat:1.0f];
+    self.fade.duration = 0.5f;
+
+    [self.twitterIcon setAlpha:0.0];
 }
 
 - (void)didReceiveMemoryWarning {
