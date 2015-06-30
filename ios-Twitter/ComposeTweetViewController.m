@@ -99,7 +99,7 @@ NSInteger const kMaxTextCount = 140;
     NSString *text = self.tweetTextView.text;
     void (^completion) (Tweet *tweet, NSError *error) = ^(Tweet *tweet, NSError *error){
         if(tweet != nil) {
-            [self.delegate didPostTweet:tweet];
+            [[NSNotificationCenter defaultCenter] postNotificationName:PostNewTweetNotification object:nil userInfo:@{ @"tweet" : tweet} ];
         }else {
             [TSMessage showNotificationWithTitle:@"Tweet failed"
                                         subtitle:@"Please try later"

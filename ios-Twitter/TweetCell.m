@@ -76,7 +76,8 @@ enum {
 }
 
 -(void) onReply {
-    [self.delegate didTapReply:self.tweet];
+    // Delegate tap to TweetsViewController, and than it will lunch ComposeTweetView.
+    [self.delegate didTapCellReply:self.tweet];
 }
 
 -(void) onRetweet {
@@ -85,6 +86,7 @@ enum {
         if (tweet != nil) {
             [self.tweet setRetweet:TwBtnActive];
             [self setRetweetState:TwBtnActive];
+            [[NSNotificationCenter defaultCenter] postNotificationName:UpdateTweetNotification object:nil userInfo:@{ @"tweet" : tweet, @"cell": self} ];
         }
         NSLog(@"retweet success");
     }];
@@ -97,16 +99,18 @@ enum {
             if (tweet != nil) {
                 [self.tweet setFavorite:TwBtnEnable];
                 [self setFavoriteState:TwBtnEnable];
+                [[NSNotificationCenter defaultCenter] postNotificationName:UpdateTweetNotification object:nil userInfo:@{ @"tweet" : tweet, @"cell": self} ];
             }
-            NSLog(@"favorite success");
+            NSLog(@"remove favorite success");
         }];
     }else{
         [[TwitterClient sharedInstance] postFavoriteCreate:self.tweet.idStr completion:^(Tweet *tweet, NSError *error) {
             if (tweet != nil) {
                 [self.tweet setFavorite:TwBtnActive];
                 [self setFavoriteState:TwBtnActive];
+                [[NSNotificationCenter defaultCenter] postNotificationName:UpdateTweetNotification object:nil userInfo:@{ @"tweet" : tweet, @"cell": self} ];
             }
-            NSLog(@"remove favorite success");
+            NSLog(@"favorite success");
         }];
     }
 }

@@ -33,18 +33,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[TweetCell onFavorite]:TweetCell.m">
+         contextName = "-[TweetsViewController onUpdateTweet:]:TweetsViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.tweet.favorited">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "__23-[TweetCell onFavorite]_block_invoke:TweetCell.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "tweet.favorited">
+               value = "tweet.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

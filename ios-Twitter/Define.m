@@ -8,6 +8,12 @@
 
 #import "Define.h"
 
+NSString * const PostNewTweetNotification = @"PostNewTweetNotification";
+NSString * const UpdateTweetNotification = @"UpdateTweetNotification";
+NSString * const DestroyTweetNotification = @"DestroyTweetNotification";
+
+
+
 @implementation Define
 
 + (UIImage *) fontImage:(NIKFontAwesomeIcon)icon rgbaValue:(unsigned)rgbaValue {

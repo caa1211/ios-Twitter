@@ -12,7 +12,7 @@
 #import "User.h"
 
 @protocol TweetCellDelegate <NSObject>
--(void) didTapReply: (Tweet *) tweet;
+-(void) didTapCellReply: (Tweet *) tweet;
 @end
 
 @interface TweetCell : UITableViewCell

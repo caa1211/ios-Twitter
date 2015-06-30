@@ -17,7 +17,7 @@
 #import "TweetDetailViewController.h"
 
 @interface TweetsViewController () <UITableViewDataSource, UITableViewDelegate,
-ComposeTweetViewControllerDelegate, TweetCellDelegate, TweetDetailViewControllerDelegate>
+ComposeTweetViewControllerDelegate, TweetCellDelegate>
 
 //@property (nonatomic, strong) UINavigationController *naviController;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -89,6 +89,11 @@ enum {
     [self.tableView registerNib:[UINib nibWithNibName:@"TweetCell" bundle:nil] forCellReuseIdentifier:@"TweetCell"];
     [self initRefreshControl];
     [self initInfiniteScroll];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onDestroyTweet:) name:DestroyTweetNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onPostNewTweet:) name:PostNewTweetNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdateTweet:) name:UpdateTweetNotification object:nil];
 }
 
 - (void) initInfiniteScroll {
@@ -237,25 +242,7 @@ enum {
     }
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-- (void)didPostTweet:(Tweet *)tweet
-{
-    NSLog(@"didPostTweet");
-    if (tweet !=nil) {
-        [self refreshData];
-    }
-}
-
-- (void)didTapReply:(Tweet *)tweet
+- (void)didTapCellReply:(Tweet *)tweet
 {
     ComposeTweetViewController *vc = [[ComposeTweetViewController alloc]initWithUser:self.loginUser andTweet:tweet];
     vc.delegate = self;
@@ -269,8 +256,30 @@ enum {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
     TweetDetailViewController *vc = [[TweetDetailViewController alloc] initWithUser:self.loginUser andTweet:self.tweets[indexPath.row]];
-    vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+
+#pragma mark - Notification handler
+
+- (void) onDestroyTweet:(NSNotification *)note {
+    Tweet *tweet = note.userInfo[@"tweet"];
+    [self refreshData];
+    NSLog(@"onPostNewTweet %@", tweet.user.name);
+}
+- (void) onPostNewTweet:(NSNotification *)note {
+    Tweet *tweet = note.userInfo[@"tweet"];
+    [self refreshData];
+    NSLog(@"onPostNewTweet %@", tweet.user.name);
+}
+- (void) onUpdateTweet:(NSNotification *)note {
+    Tweet *tweet = note.userInfo[@"tweet"];
+    TweetCell *cell = note.userInfo[@"cell"];
+    if (cell == nil) {
+        // [self refreshData];
+        [self.tableView reloadData];
+    }
+    NSLog(@"onUpdateTweet %@", tweet.user.name);
 }
 
 @end

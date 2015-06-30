@@ -10,7 +10,7 @@
 #import "TwitterClient.h"
 #import "ComposeTweetViewController.h"
 
-@interface TweetDetailViewController () <ComposeTweetViewControllerDelegate>
+@interface TweetDetailViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *screenname;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
@@ -129,20 +129,14 @@
     [[TwitterClient sharedInstance] postDestroy:self.tweet.idStr completion:^(Tweet *tweet, NSError *error) {
         if (tweet != nil) {
             NSLog(@"postDestroy success");
-           [self.delegate didPostTweet:tweet];
+            [[NSNotificationCenter defaultCenter] postNotificationName:DestroyTweetNotification object:nil userInfo:@{ @"tweet" : tweet} ];
            [self onBack];
         }
     }];
 }
 
-- (void)didPostTweet:(Tweet *)tweet
-{
-    [self.delegate didPostTweet:tweet];
-}
-
 -(void) onReply {
     ComposeTweetViewController *vc = [[ComposeTweetViewController alloc]initWithUser:self.loginUser andTweet:self.tweet];
-    vc.delegate = self;
     UINavigationController *nvController = [[UINavigationController alloc]
                                             initWithRootViewController: vc];
     // nvController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
@@ -155,9 +149,9 @@
         if (tweet != nil) {
             [self.tweet setRetweet:1];
             [self updateImages];
+            [[NSNotificationCenter defaultCenter] postNotificationName:UpdateTweetNotification object:nil userInfo:@{ @"tweet" : tweet} ];
         }
         NSLog(@"retweet success");
-       [self.delegate didPostTweet:tweet];
     }];
 }
 
@@ -168,18 +162,18 @@
             if (tweet != nil) {
                 [self.tweet setFavorite:0];
                 [self updateImages];
+                [[NSNotificationCenter defaultCenter] postNotificationName:UpdateTweetNotification object:nil userInfo:@{ @"tweet" : tweet} ];
             }
             NSLog(@"favorite success");
-            [self.delegate didPostTweet:tweet];
         }];
     }else{
         [[TwitterClient sharedInstance] postFavoriteCreate:self.tweet.idStr completion:^(Tweet *tweet, NSError *error) {
             if (tweet != nil) {
                 [self.tweet setFavorite:1];
                 [self updateImages];
+                [[NSNotificationCenter defaultCenter] postNotificationName:UpdateTweetNotification object:nil userInfo:@{ @"tweet" : tweet} ];
             }
             NSLog(@"remove favorite success");
-            [self.delegate didPostTweet:tweet];
         }];
     }
 }

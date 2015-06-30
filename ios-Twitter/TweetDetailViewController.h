@@ -12,11 +12,6 @@
 #import <UIImageView+AFNetworking.h>
 
 
-@protocol TweetDetailViewControllerDelegate <NSObject>
-- (void) didPostTweet:(Tweet*)tweet;
-@end
-
 @interface TweetDetailViewController : UIViewController
 -(id) initWithUser:(User *)user andTweet:(Tweet *)tweet;
-@property (nonatomic, weak) id <TweetDetailViewControllerDelegate> delegate;
 @end
