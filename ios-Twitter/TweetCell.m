@@ -55,8 +55,6 @@ enum {
 
     self.replyBtn.image = [Define fontImage:NIKFontAwesomeIconReply rgbaValue:0xaaaaaa];//[UIImage imageNamed:@"reply.png" ];
 
-//    [self resetDefaultStatus];
-    
     self.name.text = @"";
     self.clipsToBounds = YES;
     

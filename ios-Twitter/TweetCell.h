@@ -19,5 +19,6 @@
 -(void) setTweet:(Tweet *) tweet;
 -(void) setRetweetState:(NSInteger)state;
 -(void) setFavoriteState:(NSInteger)state;
+-(void) updateTweet:(Tweet *) tweet;
 @property (nonatomic, weak) id <TweetCellDelegate> delegate;
 @end

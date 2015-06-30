@@ -263,23 +263,68 @@ enum {
 
 #pragma mark - Notification handler
 
+-(NSInteger) findTweetIndexById:(NSString*)idStr {
+    NSInteger index = -1;
+    for (NSInteger i = 0; i<self.tweets.count; i++){
+        Tweet *displayedTweet = self.tweets[i];
+        if([displayedTweet.idStr isEqualToString:idStr]){
+            index = i;
+            break;
+        }
+    }
+    return index;
+}
+
+
+
 - (void) onDestroyTweet:(NSNotification *)note {
     Tweet *tweet = note.userInfo[@"tweet"];
-    [self refreshData];
+    NSInteger removeIndex = [self findTweetIndexById:tweet.idStr];
+    if (removeIndex!=-1) {
+        [self.tweets removeObjectAtIndex:removeIndex];
+        
+        // Remove row with animation
+        NSIndexPath *indexPath =  [NSIndexPath indexPathForRow:removeIndex inSection:0];
+        NSMutableArray *arrRows = [NSMutableArray array];
+        [arrRows addObject:indexPath];
+        [self.tableView deleteRowsAtIndexPaths:arrRows withRowAnimation:UITableViewRowAnimationFade];
+    }
+    
+    // or refresh tabel: [self.tableView reloadData];
+    // or refeth data: [self refreshData];
     NSLog(@"onPostNewTweet %@", tweet.user.name);
 }
 - (void) onPostNewTweet:(NSNotification *)note {
     Tweet *tweet = note.userInfo[@"tweet"];
-    [self refreshData];
+    [self.tweets insertObject:tweet atIndex:0];
+    
+    // Insert row with animation
+    NSMutableArray *arrRows = [NSMutableArray array];
+    [arrRows addObject:[NSIndexPath indexPathForRow:0 inSection:0]];
+    [self.tableView insertRowsAtIndexPaths:arrRows withRowAnimation:UITableViewRowAnimationFade];
+
+    // or refresh tabel: [self.tableView reloadData];
+    // or refeth data: [self refreshData];
     NSLog(@"onPostNewTweet %@", tweet.user.name);
 }
 - (void) onUpdateTweet:(NSNotification *)note {
     Tweet *tweet = note.userInfo[@"tweet"];
     TweetCell *cell = note.userInfo[@"cell"];
     if (cell == nil) {
-        // [self refreshData];
-        [self.tableView reloadData];
+          // Update by TweetDetailView
+        
+          // Update for specific cell
+//        NSInteger updateIndex = [self findTweetIndexById:tweet.idStr];
+//        NSIndexPath *indexPath =  [NSIndexPath indexPathForRow:updateIndex inSection:0];
+//        cell = (TweetCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+//        if (cell) {
+//            [cell updateTweet:tweet];
+//        }
+        
+         // Update whole table
+         [self.tableView reloadData];
     }
+
     NSLog(@"onUpdateTweet %@", tweet.user.name);
 }
 

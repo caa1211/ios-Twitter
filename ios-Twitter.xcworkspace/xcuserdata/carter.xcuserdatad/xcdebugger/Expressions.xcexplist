@@ -63,13 +63,19 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "__42-[TwitterClient postUnretweet:completion:]_block_invoke147:TwitterClient.m">
+      </ContextState>
+      <ContextState
+         contextName = "__44-[TwitterClient getRetweetsOfMe:completion:]_block_invoke_2:TwitterClient.m">
+      </ContextState>
+      <ContextState
          contextName = "__34-[LoginViewController viewDidLoad]_block_invoke:LoginViewController.m">
       </ContextState>
       <ContextState
          contextName = "-[Tweet initWithDictionary:]:Tweet.m">
          <PersistentStrings>
             <PersistentString
-               value = "dictionary[@&quot;user&quot;][@&quot;screen_name&quot;]">
+               value = "dictionary[@&quot;favorite_count&quot;]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -90,7 +96,27 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[TweetCell onRetweet]:TweetCell.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tweet.idStr">
+            </PersistentString>
+            <PersistentString
+               value = "self.tweet.retweeted_by_me">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__40-[TwitterClient postDestroy:completion:]_block_invoke147:TwitterClient.m">
+      </ContextState>
+      <ContextState
+         contextName = "__42-[TwitterClient postUnretweet:completion:]_block_invoke149:TwitterClient.m">
+      </ContextState>
+      <ContextState
          contextName = "__51-[TwitterClient homeTimelineWithParams:completion:]_block_invoke104:TwitterClient.m">
+      </ContextState>
+      <ContextState
+         contextName = "__44-[TwitterClient getRetweetsOfMe:completion:]_block_invoke:TwitterClient.m">
       </ContextState>
    </ContextStates>
 </VariablesViewState>
