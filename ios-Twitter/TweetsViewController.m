@@ -123,7 +123,7 @@ enum {
 
 - (void) initRefreshControl {
     self.refreshControl = [[UIRefreshControl alloc] init];
-    self.refreshControl.backgroundColor = [UIColor colorWithRed:0.85 green:0.49 blue:0.47 alpha:1.0];
+    self.refreshControl.backgroundColor = [UIColor colorWithRed:0.850 green:0.528 blue:0.530 alpha:1.000];
     self.refreshControl.tintColor = [UIColor whiteColor];
     [self.refreshControl addTarget:self
                             action: @selector(refreshData)

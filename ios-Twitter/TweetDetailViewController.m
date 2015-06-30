@@ -16,8 +16,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 @property (weak, nonatomic) IBOutlet UILabel *tweetLabel;
 @property (weak, nonatomic) IBOutlet UILabel *createAtLabel;
+@property (weak, nonatomic) IBOutlet UILabel *favoritesNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *retweetsNumLabel;
-@property (weak, nonatomic) IBOutlet UILabel *favoriteLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *replyBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *retweetBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *favoriteBtn;
@@ -26,6 +26,7 @@
 @property (strong, nonatomic) UIImage *retweetImage;
 @property (strong, nonatomic) UIImage *retweetActiveImage;
 @property (strong, nonatomic) UIImage *favoriteImage;
+@property (weak, nonatomic) IBOutlet UIImageView *removeBtn;
 @property (strong, nonatomic) UIImage *favoriteActiveImage;
 @end
 
@@ -66,6 +67,8 @@
     self.name.text = t.user.name;
     self.screenname.text = [NSString stringWithFormat:@"@%@",t.user.screenname ];
     self.tweetLabel.text = t.text;
+    self.favoritesNumLabel.text = [@(t.favoriteCount) stringValue];
+    self.retweetsNumLabel.text = [@(t.retweetCount) stringValue];
     
     NSString *dateString = [NSDateFormatter localizedStringFromDate:t.createdAt
                                                           dateStyle:NSDateFormatterShortStyle
@@ -78,7 +81,8 @@
     self.favoriteActiveImage = [Define fontImage:NIKFontAwesomeIconStar rgbaValue:0xffac33];
 
     self.replyBtn.image = [Define fontImage:NIKFontAwesomeIconReply rgbaValue:0xaaaaaa];
-
+    self.removeBtn.image = [Define fontImage:NIKFontAwesomeIconTrashO rgbaValue:0xaaaaaa];
+    
     [self updateImages];
     
     // Profile image
@@ -102,6 +106,7 @@
     self.replyBtn.userInteractionEnabled = YES;
     self.retweetBtn.userInteractionEnabled = YES;
     self.favoriteBtn.userInteractionEnabled = YES;
+    self.removeBtn.userInteractionEnabled = YES;
     
     UITapGestureRecognizer *tapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onReply)];
     tapped.numberOfTapsRequired = 1;
@@ -114,6 +119,20 @@
     tapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onFavorite)];
     tapped.numberOfTapsRequired = 1;
     [self.favoriteBtn addGestureRecognizer:tapped];
+    
+    tapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onRemoveTweet)];
+    tapped.numberOfTapsRequired = 1;
+    [self.removeBtn addGestureRecognizer:tapped];
+}
+
+-(void) onRemoveTweet{
+    [[TwitterClient sharedInstance] postDestroy:self.tweet.idStr completion:^(Tweet *tweet, NSError *error) {
+        if (tweet != nil) {
+            NSLog(@"postDestroy success");
+           [self.delegate didPostTweet:tweet];
+           [self onBack];
+        }
+    }];
 }
 
 - (void)didPostTweet:(Tweet *)tweet
@@ -138,6 +157,7 @@
             [self updateImages];
         }
         NSLog(@"retweet success");
+       [self.delegate didPostTweet:tweet];
     }];
 }
 
@@ -150,6 +170,7 @@
                 [self updateImages];
             }
             NSLog(@"favorite success");
+            [self.delegate didPostTweet:tweet];
         }];
     }else{
         [[TwitterClient sharedInstance] postFavoriteCreate:self.tweet.idStr completion:^(Tweet *tweet, NSError *error) {
@@ -158,12 +179,13 @@
                 [self updateImages];
             }
             NSLog(@"remove favorite success");
+            [self.delegate didPostTweet:tweet];
         }];
     }
 }
 
 - (void) onBack {
-    [self.view endEditing:YES];
+    // [self.view endEditing:YES];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

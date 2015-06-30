@@ -20,6 +20,9 @@
         self.idStr = dictionary[@"id_str"];
         self.retweeted = dictionary[@"retweeted"];
         self.favorited = dictionary[@"favorited"];
+        self.favoriteCount = [dictionary[@"favorite_count"] integerValue];
+        self.retweetCount = [dictionary[@"retweet_count"] integerValue];
+
         @try {
             self.mediaUrl = dictionary[@"entities"][@"media"][0][@"media_url"];
         }
