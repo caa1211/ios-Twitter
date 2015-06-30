@@ -48,29 +48,41 @@
                         </variation>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tBi-Gb-rI8">
-                        <rect key="frame" x="76" y="81" width="20" height="20"/>
+                        <rect key="frame" x="76" y="85" width="16" height="16"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="1TI-vN-0bk"/>
-                            <constraint firstAttribute="width" constant="20" id="RaE-Gi-kXl"/>
+                            <constraint firstAttribute="height" constant="16" id="1TI-vN-0bk"/>
+                            <constraint firstAttribute="width" constant="16" id="RaE-Gi-kXl"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="naQ-ju-j4T">
-                        <rect key="frame" x="154" y="81" width="20" height="20"/>
+                        <rect key="frame" x="150" y="85" width="16" height="16"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="Qtn-zH-aMR"/>
+                            <constraint firstAttribute="height" constant="16" id="Qtn-zH-aMR"/>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="Y6F-Cw-zYZ"/>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="bC3-sc-A9v"/>
-                            <constraint firstAttribute="width" constant="20" id="jxI-81-8d8"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="16" id="bC3-sc-A9v"/>
+                            <constraint firstAttribute="width" constant="16" id="jxI-81-8d8"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Y6F-Cw-zYZ"/>
+                                <exclude reference="bC3-sc-A9v"/>
+                            </mask>
+                        </variation>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qz1-MK-Ffv">
-                        <rect key="frame" x="235" y="81" width="20" height="20"/>
+                        <rect key="frame" x="227" y="85" width="16" height="16"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="MU5-Xj-bZU"/>
-                            <constraint firstAttribute="width" constant="20" id="b8c-aY-JHg"/>
+                            <constraint firstAttribute="width" constant="16" id="b8c-aY-JHg"/>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="bOI-iV-eyl"/>
-                            <constraint firstAttribute="height" constant="20" id="kVN-TX-YMj"/>
+                            <constraint firstAttribute="height" constant="16" id="kVN-TX-YMj"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="MU5-Xj-bZU"/>
+                                <exclude reference="bOI-iV-eyl"/>
+                            </mask>
+                        </variation>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eZG-oe-Gbk">
                         <rect key="frame" x="301" y="8" width="16" height="18"/>

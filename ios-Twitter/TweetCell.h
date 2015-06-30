@@ -11,6 +11,13 @@
 #import "Tweet.h"
 #import "User.h"
 
+@protocol TweetCellDelegate <NSObject>
+-(void) didTapReply: (Tweet *) tweet;
+@end
+
 @interface TweetCell : UITableViewCell
 -(void) setTweet:(Tweet *) tweet;
+-(void) setRetweetState:(NSInteger)state;
+-(void) setFavoriteState:(NSInteger)state;
+@property (nonatomic, weak) id <TweetCellDelegate> delegate;
 @end

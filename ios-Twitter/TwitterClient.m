@@ -83,6 +83,61 @@ NSString * const kTwitterBaseUrl = @"https://api.twitter.com";
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         completion(nil, error);
     }] ;
-    
 }
+
+-(void) postReply:(NSString *)text toTwitter:(NSString *)idStr completion: (void(^)(Tweet *tweet, NSError *error))completion{
+    [self POST:@"1.1/statuses/update.json" parameters:@{@"status": text, @"in_reply_to_status_id": idStr} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        Tweet *tweet = [[Tweet alloc]initWithDictionary:responseObject];
+        completion(tweet, nil);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completion(nil, error);
+    }] ;
+}
+
+
+-(void) postRetweet:(NSString *)idStr completion: (void(^)(Tweet *tweet, NSError *error))completion{
+    NSString *url = [NSString stringWithFormat:@"1.1/statuses/retweet/%@.json",idStr];
+    
+    [self POST:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        Tweet *tweet = [[Tweet alloc]initWithDictionary:responseObject];
+        completion(tweet, nil);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completion(nil, error);
+    }] ;
+}
+
+-(void) postDestroy:(NSString *)idStr completion: (void(^)(Tweet *tweet, NSError *error))completion{
+    NSString *url = [NSString stringWithFormat:@"1.1/statuses/destroy/%@.json",idStr];
+    
+    [self POST:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        Tweet *tweet = [[Tweet alloc]initWithDictionary:responseObject];
+        completion(tweet, nil);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completion(nil, error);
+    }] ;
+}
+
+
+-(void) postFavoriteCreate:(NSString *)idStr completion: (void(^)(Tweet *tweet, NSError *error))completion{
+    NSString *url = @"1.1/favorites/create.json";
+    
+    [self POST:url parameters:@{@"id": idStr} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        Tweet *tweet = [[Tweet alloc]initWithDictionary:responseObject];
+        completion(tweet, nil);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completion(nil, error);
+    }] ;
+}
+
+-(void) postFavoriteDestroy:(NSString *)idStr completion: (void(^)(Tweet *tweet, NSError *error))completion{
+    NSString *url = @"1.1/favorites/destroy.json";
+    [self POST:url parameters:@{@"id": idStr} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        Tweet *tweet = [[Tweet alloc]initWithDictionary:responseObject];
+        completion(tweet, nil);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completion(nil, error);
+    }] ;
+}
+
+
 @end

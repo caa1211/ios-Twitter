@@ -17,7 +17,11 @@
 @property(nonatomic, strong) NSString *timestamp;
 @property(nonatomic, strong) NSString *mediaUrl;
 @property (nonatomic, strong) NSString *idStr;
+@property (nonatomic, strong) NSString *retweeted;
+@property (nonatomic, strong) NSString *favorited;
 
 -(id)initWithDictionary: (NSDictionary *)dictionary;
+-(void) setRetweet:(NSInteger)value;
+-(void) setFavorite:(NSInteger)value;
 +(NSArray *) tweetsWithArray: (NSArray *) array;
 @end

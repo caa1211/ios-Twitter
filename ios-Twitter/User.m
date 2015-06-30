@@ -22,13 +22,14 @@ NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
 
 -(id)initWithDictionary: (NSDictionary *)dictionary {
     self = [self init];
-    
+    // NSLog(@"user: %@", dictionary);
     if(self){
         self.name = dictionary[@"name"];
         self.screenname = dictionary[@"screen_name"];
         self.profileImageUrl = dictionary[@"profile_image_url"];
         self.tagline = dictionary[@"description"];
         self.dictionary = dictionary;
+        self.idStr = dictionary[@"id_str"];
     }
     return self;
 }

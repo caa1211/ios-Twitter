@@ -15,11 +15,11 @@
     self = [super init];
     
     if (self) {
-       
         self.user = [[User alloc] initWithDictionary: dictionary[@"user"]];
         self.text = dictionary[@"text"];
         self.idStr = dictionary[@"id_str"];
-
+        self.retweeted = dictionary[@"retweeted"];
+        self.favorited = dictionary[@"favorited"];
         @try {
             self.mediaUrl = dictionary[@"entities"][@"media"][0][@"media_url"];
         }
@@ -35,6 +35,14 @@
     }
     return self;
     
+}
+
+-(void) setFavorite:(NSInteger)value {
+    self.favorited = [@(value) stringValue];
+}
+
+-(void) setRetweet:(NSInteger)value {
+     self.retweeted = [@(value) stringValue];
 }
 
 +(NSArray *) tweetsWithArray: (NSArray *) array {
@@ -78,46 +86,4 @@
     return  result;
 }
 
-//- (NSString*)timestamp
-//{
-//    // Calculate distance time string
-//    //
-//    time_t now;
-//    time(&now);
-//    NSString *timestamp;
-//    int distance = (int)difftime(now, _createdAt);
-//    if (distance < 0) distance = 0;
-//    
-//    if (distance < 60) {
-//        timestamp = [NSString stringWithFormat:@"%d %s", distance, (distance == 1) ? "second ago" : "seconds ago"];
-//    }
-//    else if (distance < 60 * 60) {
-//        distance = distance / 60;
-//        timestamp = [NSString stringWithFormat:@"%d %s", distance, (distance == 1) ? "minute ago" : "minutes ago"];
-//    }
-//    else if (distance < 60 * 60 * 24) {
-//        distance = distance / 60 / 60;
-//        timestamp = [NSString stringWithFormat:@"%d %s", distance, (distance == 1) ? "hour ago" : "hours ago"];
-//    }
-//    else if (distance < 60 * 60 * 24 * 7) {
-//        distance = distance / 60 / 60 / 24;
-//        timestamp = [NSString stringWithFormat:@"%d %s", distance, (distance == 1) ? "day ago" : "days ago"];
-//    }
-//    else if (distance < 60 * 60 * 24 * 7 * 4) {
-//        distance = distance / 60 / 60 / 24 / 7;
-//        timestamp = [NSString stringWithFormat:@"%d %s", distance, (distance == 1) ? "week ago" : "weeks ago"];
-//    }
-//    else {
-//        static NSDateFormatter *dateFormatter = nil;
-//        if (dateFormatter == nil) {
-//            dateFormatter = [[NSDateFormatter alloc] init];
-//            [dateFormatter setDateStyle:NSDateFormatterShortStyle];
-//            [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-//        }
-//        
-//        NSDate *date = [NSDate dateWithTimeIntervalSince1970:createdAt];
-//        timestamp = [dateFormatter stringFromDate:date];
-//    }
-//    return timestamp;
-//}
 @end

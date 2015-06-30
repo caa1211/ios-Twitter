@@ -15,7 +15,7 @@
 #import <TSMessage.h>
 #import "ComposeTweetViewController.h"
 
-@interface TweetsViewController () <UITableViewDataSource, UITableViewDelegate, ComposeTweetViewControllerDelegate>
+@interface TweetsViewController () <UITableViewDataSource, UITableViewDelegate, ComposeTweetViewControllerDelegate, TweetCellDelegate>
 //@property (nonatomic, strong) UINavigationController *naviController;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *tweets;
@@ -49,9 +49,9 @@ enum {
     
     [[TwitterClient sharedInstance] homeTimelineWithParams:nil completion:^(NSArray *tweets, NSError *error) {
         if (tweets == nil){
-            // NSString *errorMsg =  error.userInfo[@"NSLocalizedDescription"];
+            NSString *errorMsg =  error.userInfo[@"NSLocalizedDescription"];
             [TSMessage showNotificationWithTitle:@"Newtork Error"
-                                        subtitle:@"Please check your connection and try again later"
+                                        subtitle:errorMsg //@"Please check your connection and try again later"
                                         type:TSMessageNotificationTypeWarning];
         }else{
             self.tweets = [[NSMutableArray alloc] initWithArray: tweets];
@@ -183,9 +183,19 @@ enum {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
+    Tweet *tweetData = self.tweets[indexPath.row];
+    [cell setTweet:tweetData];
 
-    [cell setTweet:self.tweets[indexPath.row]];
+    if ([self.loginUser.idStr isEqual:tweetData.user.idStr]) {
+        // can't retweet self
+        [cell setRetweetState:-1];
+    }else{
+        [cell setRetweetState: [tweetData.retweeted integerValue]];
+    }
     
+    [cell setFavoriteState: [tweetData.favorited integerValue]];
+    
+    cell.delegate = self;
     return cell;
 }
 
@@ -241,5 +251,14 @@ enum {
     }
 }
 
+- (void)didTapReply:(Tweet *)tweet
+{
+    ComposeTweetViewController *vc = [[ComposeTweetViewController alloc]initWithUser:self.loginUser andTweet:tweet];
+    vc.delegate = self;
+    UINavigationController *nvController = [[UINavigationController alloc]
+                                            initWithRootViewController: vc];
+    // nvController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentViewController:nvController animated:YES completion:nil];
+}
 
 @end

@@ -16,5 +16,7 @@
 
 @interface ComposeTweetViewController : UIViewController
 -(id) initWithUser:(User*)user;
+-(id) initWithUser:(User*)user andTweet:(Tweet *)tweet;
+
 @property (nonatomic, weak) id <ComposeTweetViewControllerDelegate> delegate;
 @end

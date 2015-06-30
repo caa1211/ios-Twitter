@@ -21,6 +21,7 @@ NSInteger const kMaxTextCount = 140;
 @property (weak, nonatomic) IBOutlet UITextView *tweetTextView;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 @property (strong, nonatomic) User *loginUser;
+@property (strong, nonatomic) Tweet *replyTweet;
 @property (strong, nonatomic) UIBarButtonItem *tweetBtn;
 
 @property (strong, nonatomic) UIImage *tweetEnableImg;
@@ -28,6 +29,16 @@ NSInteger const kMaxTextCount = 140;
 @end
 
 @implementation ComposeTweetViewController
+
+
+-(id) initWithUser:(User*)user andTweet:(Tweet *)tweet {
+    self = [super init];
+    if (self) {
+        self.loginUser = user;
+        self.replyTweet = tweet;
+    }
+    return self;
+}
 
 - (id) initWithUser: (User *)user{
     self = [super init];
@@ -49,6 +60,11 @@ NSInteger const kMaxTextCount = 140;
     self.tweetTextView.delegate = self;
     self.textCount.text = [@(kMaxTextCount) stringValue];
     
+    if(self.replyTweet != nil) {
+        self.tweetTextView.text = [ NSString stringWithFormat:@"@%@ ",self.replyTweet.user.screenname];
+        self.textCount.text = [@(kMaxTextCount - self.tweetTextView.text.length) stringValue];
+    }
+ 
     NSString *profileImageUrl = user.profileImageUrl;
     [self.profileImage setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:profileImageUrl] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:3]
                              placeholderImage:nil success: nil failure:nil];
@@ -96,7 +112,12 @@ NSInteger const kMaxTextCount = 140;
         [self dismissViewControllerAnimated:YES completion:nil];
     };
     
-    [[TwitterClient sharedInstance] postTweet:text completion:completion];
+    if (self.replyTweet != nil) {
+        [[TwitterClient sharedInstance] postReply:text toTwitter:self.replyTweet.idStr completion:completion];
+    }else{
+        [[TwitterClient sharedInstance] postTweet:text completion:completion];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
