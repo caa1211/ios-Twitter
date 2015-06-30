@@ -7,23 +7,6 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "No"
-            ignoreCount = "30721"
-            condition = "!&quot;Bookmark&quot;"
-            continueAfterRunningActions = "Yes"
-            filePath = "ios-Twitter/TweetsViewController.m"
-            timestampString = "1435599416.203123"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "287"
-            landmarkName = "-refreshData"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ios-Twitter/TwitterClient.m"
@@ -59,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ios-Twitter/TweetsViewController.m"
-            timestampString = "457316468.725752"
+            timestampString = "457326099.880277"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "249"
-            endingLineNumber = "249"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
             landmarkName = "-didPostTweet:"
             landmarkType = "5">
          </BreakpointContent>
@@ -75,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ios-Twitter/ComposeTweetViewController.m"
-            timestampString = "457316781.846937"
+            timestampString = "457324003.064429"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
             landmarkName = "-onTweet"
             landmarkType = "5">
          </BreakpointContent>
@@ -91,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ios-Twitter/ComposeTweetViewController.m"
-            timestampString = "457317089.434704"
+            timestampString = "457324003.064429"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "-updateTweetBtnState"
             landmarkType = "5">
          </BreakpointContent>
@@ -107,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ios-Twitter/TweetsViewController.m"
-            timestampString = "457303625.212707"
+            timestampString = "457326099.880277"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -234,38 +217,6 @@
             timestampString = "457312908.137698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "-onRetweet"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ios-Twitter/TweetCell.m"
-            timestampString = "457312908.137698"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "-onRetweet"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ios-Twitter/TweetCell.m"
-            timestampString = "457312908.137698"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
             startingLineNumber = "83"
             endingLineNumber = "83"
             landmarkName = "-onRetweet"
@@ -279,7 +230,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ios-Twitter/TweetCell.m"
-            timestampString = "457314636.294053"
+            timestampString = "457327135.428621"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "97"
@@ -295,11 +246,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ios-Twitter/TweetCell.m"
-            timestampString = "457315048.487282"
+            timestampString = "457327135.428621"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
             landmarkName = "-setFavoriteState:"
             landmarkType = "5">
          </BreakpointContent>
@@ -311,7 +262,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ios-Twitter/TweetCell.m"
-            timestampString = "457314636.294053"
+            timestampString = "457327135.428621"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "96"
@@ -357,53 +308,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ios-Twitter/TweetCell.m"
-            timestampString = "457314782.115901"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
-            landmarkName = "-onFavorite"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[TweetCell onFavorite]"
-                  moduleName = "ios-Twitter"
-                  urlString = "file:///Users/carter/Code/ios/class3/ios-Twitter/ios-Twitter/TweetCell.m"
-                  timestampString = "457314782.118059"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "104"
-                  endingLineNumber = "104"
-                  offsetFromSymbolStart = "457">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__23-[TweetCell onFavorite]_block_invoke92"
-                  moduleName = "ios-Twitter"
-                  urlString = "file:///Users/carter/Code/ios/class3/ios-Twitter/ios-Twitter/TweetCell.m"
-                  timestampString = "457314782.118241"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "104"
-                  endingLineNumber = "104"
-                  offsetFromSymbolStart = "67">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ios-Twitter/TweetCell.m"
-            timestampString = "457314784.864498"
+            timestampString = "457327135.428621"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "95"
@@ -416,15 +321,16 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ios-Twitter/TweetCell.m"
-            timestampString = "457314801.492563"
+            ignoreCount = "30721"
+            condition = "!&quot;Bookmark&quot;"
+            continueAfterRunningActions = "Yes"
+            filePath = "ios-Twitter/TweetsViewController.m"
+            timestampString = "1435625712.314412"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
-            landmarkName = "-onFavorite"
+            startingLineNumber = "266"
+            endingLineNumber = "531"
+            landmarkName = "-didTapReply:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -434,13 +340,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ios-Twitter/TweetCell.m"
-            timestampString = "457315780.838965"
+            filePath = "ios-Twitter/TweetDetailViewController.m"
+            timestampString = "457325431.121292"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "-onRetweet"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ios-Twitter/TweetDetailViewController.m"
+            timestampString = "457326858.607163"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "-onReply"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -452,12 +374,12 @@
             condition = "!&quot;Bookmark&quot;"
             continueAfterRunningActions = "Yes"
             filePath = "ios-Twitter/TweetsViewController.m"
-            timestampString = "1435623695.652943"
+            timestampString = "1435633295.534921"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "256"
-            endingLineNumber = "511"
-            landmarkName = "-didTapReply:"
+            startingLineNumber = "253"
+            endingLineNumber = "505"
+            landmarkName = "-didPostTweet:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

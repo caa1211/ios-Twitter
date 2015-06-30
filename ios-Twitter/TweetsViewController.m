@@ -14,8 +14,11 @@
 #import <UIScrollView+InfiniteScroll.h>
 #import <TSMessage.h>
 #import "ComposeTweetViewController.h"
+#import "TweetDetailViewController.h"
 
-@interface TweetsViewController () <UITableViewDataSource, UITableViewDelegate, ComposeTweetViewControllerDelegate, TweetCellDelegate>
+@interface TweetsViewController () <UITableViewDataSource, UITableViewDelegate,
+ComposeTweetViewControllerDelegate, TweetCellDelegate, TweetDetailViewControllerDelegate>
+
 //@property (nonatomic, strong) UINavigationController *naviController;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *tweets;
@@ -246,6 +249,7 @@ enum {
 
 - (void)didPostTweet:(Tweet *)tweet
 {
+    NSLog(@"didPostTweet");
     if (tweet !=nil) {
         [self refreshData];
     }
@@ -259,6 +263,14 @@ enum {
                                             initWithRootViewController: vc];
     // nvController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self presentViewController:nvController animated:YES completion:nil];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    TweetDetailViewController *vc = [[TweetDetailViewController alloc] initWithUser:self.loginUser andTweet:self.tweets[indexPath.row]];
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

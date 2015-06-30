@@ -111,6 +111,15 @@ enum {
     }
 }
 
+-(void) onRemoveTweet: (Tweet *) tweet{
+    [[TwitterClient sharedInstance] postDestroy:self.tweet.idStr completion:^(Tweet *tweet, NSError *error) {
+        if (tweet != nil) {
+            NSLog(@"postDestroy success");
+        }
+        
+    }];
+}
+
 -(void) setTweet:(Tweet *) tweet {
     User *user = tweet.user;
     _user = user;

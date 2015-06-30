@@ -66,20 +66,17 @@ NSInteger const kMaxTextCount = 140;
     }
  
     NSString *profileImageUrl = user.profileImageUrl;
-    [self.profileImage setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:profileImageUrl] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:3]
-                             placeholderImage:nil success: nil failure:nil];
+    [self.profileImage setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:profileImageUrl] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:3] placeholderImage:nil success: nil failure:nil];
  
+    self.tweetEnableImg = [Define fontImage:NIKFontAwesomeIconPaperPlane rgbaValue:0xffffff];
+    self.tweetDisableImg = [Define fontImage:NIKFontAwesomeIconPaperPlane rgbaValue:0xa6cfe3];
+    self.tweetBtn = [[UIBarButtonItem alloc] initWithImage:self.tweetEnableImg style:UIBarButtonItemStylePlain target:self action:@selector(onTweet)];
+    [self.tweetBtn setTitleTextAttributes: @{NSForegroundColorAttributeName:[UIColor whiteColor] } forState:UIControlStateNormal];
+    
     // Custom back button
     UIImage *backImg = [Define fontImage:NIKFontAwesomeIconTimesCircle rgbaValue:0xffffff];
     UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] initWithImage:backImg style:UIBarButtonItemStylePlain target:self action:@selector(onBack)];
-    
-    self.tweetEnableImg = [Define fontImage:NIKFontAwesomeIconPaperPlane rgbaValue:0xffffff];
-    
-    self.tweetDisableImg = [Define fontImage:NIKFontAwesomeIconPaperPlane rgbaValue:0xa6cfe3];
-    self.tweetBtn = [[UIBarButtonItem alloc] initWithImage:self.tweetEnableImg style:UIBarButtonItemStylePlain target:self action:@selector(onTweet)];
 
-    [self.tweetBtn setTitleTextAttributes: @{NSForegroundColorAttributeName:[UIColor whiteColor] } forState:UIControlStateNormal];
-    
     self.navigationItem.leftBarButtonItem = backBtn;
     self.navigationItem.rightBarButtonItem = self.tweetBtn;
     [self.navigationController.navigationBar setBarTintColor:[[UIColor alloc] initWithRed:0.298 green:0.646 blue:0.920 alpha:1.000]];

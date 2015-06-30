@@ -41,8 +41,8 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@Caa1211Caa" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uxI-9i-LG4">
-                    <rect key="frame" x="76" y="95" width="101" height="18"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <rect key="frame" x="76" y="95" width="88.5" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>

@@ -122,7 +122,7 @@
                     <constraint firstItem="Qz1-MK-Ffv" firstAttribute="leading" secondItem="naQ-ju-j4T" secondAttribute="trailing" constant="61" id="9We-bg-czz"/>
                     <constraint firstItem="LS5-Jk-c2p" firstAttribute="top" secondItem="Tmm-ob-m7q" secondAttribute="bottom" constant="7" id="A3Q-PY-RxF"/>
                     <constraint firstItem="eZG-oe-Gbk" firstAttribute="centerY" secondItem="Tmm-ob-m7q" secondAttribute="centerY" id="AKz-O0-Mpd"/>
-                    <constraint firstItem="Tmm-ob-m7q" firstAttribute="leading" secondItem="eZG-oe-Gbk" secondAttribute="trailing" constant="6" id="AaP-dJ-Zcu"/>
+                    <constraint firstItem="Tmm-ob-m7q" firstAttribute="leading" secondItem="eZG-oe-Gbk" secondAttribute="trailing" constant="3.5" id="AaP-dJ-Zcu"/>
                     <constraint firstItem="irj-XJ-vfF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="Dao-YL-r6P"/>
                     <constraint firstAttribute="trailing" secondItem="eZG-oe-Gbk" secondAttribute="trailing" constant="35" id="EYJ-ad-det"/>
                     <constraint firstItem="Ywl-ii-MJU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="ICq-Kr-fbh"/>
@@ -153,6 +153,7 @@
                         <exclude reference="Xp9-EJ-OVg"/>
                         <exclude reference="Z7N-fL-PuZ"/>
                         <exclude reference="EYJ-ad-det"/>
+                        <exclude reference="W0e-Wc-p6E"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>
