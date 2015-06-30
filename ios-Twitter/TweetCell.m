@@ -55,7 +55,7 @@ enum {
 
     self.replyBtn.image = [Define fontImage:NIKFontAwesomeIconReply rgbaValue:0xaaaaaa];//[UIImage imageNamed:@"reply.png" ];
 
-    [self resetDefaultStatus];
+//    [self resetDefaultStatus];
     
     self.name.text = @"";
     self.clipsToBounds = YES;
@@ -64,6 +64,7 @@ enum {
     UITapGestureRecognizer *tapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onReply)];
     tapped.numberOfTapsRequired = 1;
     [self.replyBtn addGestureRecognizer:tapped];
+    self.replyBtn.userInteractionEnabled = YES;
     
     tapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onRetweet)];
     tapped.numberOfTapsRequired = 1;
@@ -85,7 +86,7 @@ enum {
     [[TwitterClient sharedInstance] postRetweet:self.tweet.idStr completion:^(Tweet *tweet, NSError *error) {
         if (tweet != nil) {
             [self.tweet setRetweet:TwBtnActive];
-            [self setRetweetState:TwBtnActive];
+            [self updateTweet:tweet];
             [[NSNotificationCenter defaultCenter] postNotificationName:UpdateTweetNotification object:nil userInfo:@{ @"tweet" : tweet, @"cell": self} ];
         }
         NSLog(@"retweet success");
@@ -98,7 +99,7 @@ enum {
         [[TwitterClient sharedInstance] postFavoriteDestroy:self.tweet.idStr completion:^(Tweet *tweet, NSError *error) {
             if (tweet != nil) {
                 [self.tweet setFavorite:TwBtnEnable];
-                [self setFavoriteState:TwBtnEnable];
+                [self updateTweet:tweet];
                 [[NSNotificationCenter defaultCenter] postNotificationName:UpdateTweetNotification object:nil userInfo:@{ @"tweet" : tweet, @"cell": self} ];
             }
             NSLog(@"remove favorite success");
@@ -107,7 +108,7 @@ enum {
         [[TwitterClient sharedInstance] postFavoriteCreate:self.tweet.idStr completion:^(Tweet *tweet, NSError *error) {
             if (tweet != nil) {
                 [self.tweet setFavorite:TwBtnActive];
-                [self setFavoriteState:TwBtnActive];
+                [self updateTweet:tweet];
                 [[NSNotificationCenter defaultCenter] postNotificationName:UpdateTweetNotification object:nil userInfo:@{ @"tweet" : tweet, @"cell": self} ];
             }
             NSLog(@"favorite success");
@@ -126,13 +127,7 @@ enum {
 
 -(void) setTweet:(Tweet *) tweet {
     User *user = tweet.user;
-    _user = user;
-    _tweet = tweet;
-    self.name.text = user.name;
-    self.createAt.text = tweet.timestamp;
-    self.tweetText.text = tweet.text;
-    self.screenName.text = [NSString stringWithFormat:@"@%@", user.screenname ];
-    
+
     NSString *profileImageUrl = user.profileImageUrl;
     
     [self.profileImage setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:profileImageUrl] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:3]
@@ -153,7 +148,9 @@ enum {
     self.profileImage.layer.borderWidth = 1.0f;
     self.profileImage.layer.borderColor = CGColorRetain([UIColor colorWithRed:0.335 green:0.632 blue:0.916 alpha:1.000].CGColor);
     
-
+    
+    [self assignTweet:tweet];
+    
     // TODO: media preview
 //    if(tweet.mediaUrl != nil){
 //        [mv setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:tweet.mediaUrl] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:3] placeholderImage:nil success: ^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image){
@@ -161,6 +158,34 @@ enum {
 //        } failure:nil];
 //    }
 
+}
+
+-(void) assignTweet:(Tweet *) tweet {
+    User *user = tweet.user;
+    _user = user;
+    _tweet = tweet;
+    self.name.text = user.name;
+    self.createAt.text = tweet.timestamp;
+    self.tweetText.text = tweet.text;
+    self.screenName.text = [NSString stringWithFormat:@"@%@", user.screenname ];
+    
+    [self setFavoriteState: [self.tweet.favorited integerValue]];
+    if(self.tweet.retweetable == YES){
+        [self setRetweetState: [self.tweet.retweeted integerValue]];
+    }else{
+        [self setRetweetState: TwBtnDisable];
+    }
+}
+
+-(void) updateTweet:(Tweet *) tweet {
+    self.tweet.favorited = tweet.favorited;
+    self.tweet.retweeted = tweet.retweeted;
+    [self setFavoriteState: [self.tweet.favorited integerValue]];
+    if(self.tweet.retweetable == YES){
+        [self setRetweetState: [self.tweet.retweeted integerValue]];
+    }else{
+        [self setRetweetState: TwBtnDisable];
+    }
 }
 
 -(void) setRetweetState:(NSInteger)state {
@@ -172,10 +197,13 @@ enum {
             break;
         case TwBtnEnable:
             self.retweetBtn.image = self.retweetImage;
+            self.retweetBtn.userInteractionEnabled = YES;
             [self.retweetBtn setAlpha:1];
             break;
         case TwBtnActive:
             self.retweetBtn.image = self.retweetActiveImage;
+            self.retweetBtn.userInteractionEnabled = YES;
+            [self.retweetBtn setAlpha:1];
             break;
         default:
             break;
@@ -191,10 +219,13 @@ enum {
             break;
         case TwBtnEnable:
             self.favoriteBtn.image = self.favoriteImage;
+            self.favoriteBtn.userInteractionEnabled = YES;
             [self.favoriteBtn setAlpha:1];
             break;
         case TwBtnActive:
             self.favoriteBtn.image = self.favoriteActiveImage;
+             self.favoriteBtn.userInteractionEnabled = YES;
+            [self.favoriteBtn setAlpha:1];
             break;
         default:
             break;
@@ -207,23 +238,10 @@ enum {
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
-
--(void) resetDefaultStatus {
-    self.profileImage.image = nil;
-    self.replyBtn.userInteractionEnabled = YES;
-    self.retweetBtn.userInteractionEnabled = YES;
-    self.favoriteBtn.userInteractionEnabled = YES;
-    
-    self.retweetBtn.image = self.retweetImage;
-    self.favoriteBtn.image = self.favoriteImage;
-
-    [self setRetweetState: TwBtnEnable];
-    [self setFavoriteState: TwBtnEnable];
-}
-
 - (void)prepareForReuse {
     [super prepareForReuse];
-    [self resetDefaultStatus];
+    self.profileImage.image = nil;
+    [self assignTweet:self.tweet];
 }
 
 

@@ -192,16 +192,21 @@ enum {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     Tweet *tweetData = self.tweets[indexPath.row];
-    [cell setTweet:tweetData];
 
     if ([self.loginUser.idStr isEqual:tweetData.user.idStr]) {
         // can't retweet self
-        [cell setRetweetState:-1];
+        //[cell setRetweetState:-1];
+        [tweetData setRetweetable:NO];
     }else{
-        [cell setRetweetState: [tweetData.retweeted integerValue]];
+        //[cell setRetweetState: [tweetData.retweeted integerValue]];
+        [tweetData setRetweetable:YES];
     }
     
-    [cell setFavoriteState: [tweetData.favorited integerValue]];
+    [cell setTweet:tweetData];
+
+    
+//
+//    [cell setFavoriteState: [tweetData.favorited integerValue]];
     
     cell.delegate = self;
     return cell;

@@ -21,9 +21,11 @@
 @property (nonatomic, strong) NSString *favorited;
 @property (nonatomic, assign) NSInteger favoriteCount;
 @property (nonatomic, assign) NSInteger retweetCount;
+@property (nonatomic, assign) BOOL retweetable;
 
 -(id)initWithDictionary: (NSDictionary *)dictionary;
 -(void) setRetweet:(NSInteger)value;
 -(void) setFavorite:(NSInteger)value;
+-(void) setRetweetable:(BOOL)value;
 +(NSArray *) tweetsWithArray: (NSArray *) array;
 @end

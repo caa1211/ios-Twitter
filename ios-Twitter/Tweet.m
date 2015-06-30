@@ -22,7 +22,7 @@
         self.favorited = dictionary[@"favorited"];
         self.favoriteCount = [dictionary[@"favorite_count"] integerValue];
         self.retweetCount = [dictionary[@"retweet_count"] integerValue];
-
+        self.retweetable = YES;
         @try {
             self.mediaUrl = dictionary[@"entities"][@"media"][0][@"media_url"];
         }
@@ -40,12 +40,30 @@
     
 }
 
+-(void) setRetweetable:(BOOL)value {
+    _retweetable = value;
+}
+
 -(void) setFavorite:(NSInteger)value {
-    self.favorited = [@(value) stringValue];
+    if (self.favorited != [@(value) stringValue]){
+        if(value == 1 ){
+            self.favoriteCount ++;
+        }else {
+            self.favoriteCount --;
+        }
+        self.favorited = [@(value) stringValue];
+    }
 }
 
 -(void) setRetweet:(NSInteger)value {
-     self.retweeted = [@(value) stringValue];
+    if (self.retweeted != [@(value) stringValue]){
+        if(value == 1 ){
+            self.retweetCount ++;
+        }else {
+            self.retweetCount --;
+        }
+        self.retweeted = [@(value) stringValue];
+    }
 }
 
 +(NSArray *) tweetsWithArray: (NSArray *) array {

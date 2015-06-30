@@ -14,21 +14,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "__35-[TweetsViewController viewDidLoad]_block_invoke:TweetsViewController.m">
+         contextName = "-[User initWithDictionary:]:User.m">
          <PersistentStrings>
             <PersistentString
-               value = "error.userInfo[@&quot;NSLocalizedDescription&quot;]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "__31-[LoginViewController onLogin:]_block_invoke_2:LoginViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[Tweet initWithDictionary:]:Tweet.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "dictionary[@&quot;user&quot;][@&quot;screen_name&quot;]">
+               value = "self.screenname">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -41,15 +30,26 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[ComposeTweetViewController textViewDidChange:]:ComposeTweetViewController.m">
+         contextName = "__31-[LoginViewController onLogin:]_block_invoke_2:LoginViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[TweetDetailViewController updateTweet:]:TweetDetailViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.tweetBtn.enabled">
+               value = "tweet.favoriteCount">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "__34-[LoginViewController viewDidLoad]_block_invoke:LoginViewController.m">
+         contextName = "-[TweetCell assignTweet:]:TweetCell.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tweet.retweetable">
+            </PersistentString>
+            <PersistentString
+               value = "tweet.retweetable">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[BDBOAuth1RequestOperationManager initWithBaseURL:consumerKey:consumerSecret:]:BDBOAuth1RequestOperationManager.m">
@@ -63,15 +63,34 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "__51-[TwitterClient homeTimelineWithParams:completion:]_block_invoke104:TwitterClient.m">
+         contextName = "__34-[LoginViewController viewDidLoad]_block_invoke:LoginViewController.m">
       </ContextState>
       <ContextState
-         contextName = "-[User initWithDictionary:]:User.m">
+         contextName = "-[Tweet initWithDictionary:]:Tweet.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.screenname">
+               value = "dictionary[@&quot;user&quot;][@&quot;screen_name&quot;]">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ComposeTweetViewController textViewDidChange:]:ComposeTweetViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tweetBtn.enabled">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__35-[TweetsViewController viewDidLoad]_block_invoke:TweetsViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "error.userInfo[@&quot;NSLocalizedDescription&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__51-[TwitterClient homeTimelineWithParams:completion:]_block_invoke104:TwitterClient.m">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

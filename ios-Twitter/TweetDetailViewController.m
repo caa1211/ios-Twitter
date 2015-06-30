@@ -41,6 +41,12 @@
     return self;
 }
 
+-(void) updateTweet:(Tweet*)tweet {
+    self.favoritesNumLabel.text =[ @(self.tweet.favoriteCount) stringValue ];
+    self.retweetsNumLabel.text = [ @(self.tweet.retweetCount) stringValue ];
+    [self updateImages];
+}
+
 -(void) updateImages{
     if ([self.tweet.favorited integerValue] == 1) {
         self.favoriteBtn.image = self.favoriteActiveImage;
@@ -153,7 +159,7 @@
     [[TwitterClient sharedInstance] postRetweet:self.tweet.idStr completion:^(Tweet *tweet, NSError *error) {
         if (tweet != nil) {
             [self.tweet setRetweet:1];
-            [self updateImages];
+            [self updateTweet:tweet];
             [[NSNotificationCenter defaultCenter] postNotificationName:UpdateTweetNotification object:nil userInfo:@{ @"tweet" : tweet} ];
         }
         NSLog(@"retweet success");
@@ -166,7 +172,7 @@
         [[TwitterClient sharedInstance] postFavoriteDestroy:self.tweet.idStr completion:^(Tweet *tweet, NSError *error) {
             if (tweet != nil) {
                 [self.tweet setFavorite:0];
-                [self updateImages];
+                [self updateTweet:tweet];
                 [[NSNotificationCenter defaultCenter] postNotificationName:UpdateTweetNotification object:nil userInfo:@{ @"tweet" : tweet} ];
             }
             NSLog(@"favorite success");
@@ -175,7 +181,7 @@
         [[TwitterClient sharedInstance] postFavoriteCreate:self.tweet.idStr completion:^(Tweet *tweet, NSError *error) {
             if (tweet != nil) {
                 [self.tweet setFavorite:1];
-                [self updateImages];
+                [self updateTweet:tweet];
                 [[NSNotificationCenter defaultCenter] postNotificationName:UpdateTweetNotification object:nil userInfo:@{ @"tweet" : tweet} ];
             }
             NSLog(@"remove favorite success");
