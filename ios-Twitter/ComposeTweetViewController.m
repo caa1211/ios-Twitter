@@ -64,7 +64,7 @@ NSInteger const kMaxTextCount = 140;
         self.tweetTextView.text = [ NSString stringWithFormat:@"@%@ ",self.replyTweet.user.screenname];
         self.textCount.text = [@(kMaxTextCount - self.tweetTextView.text.length) stringValue];
     }
- 
+
     NSString *profileImageUrl = user.profileImageUrl;
     [self.profileImage setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:profileImageUrl] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:3] placeholderImage:nil success: nil failure:nil];
  
@@ -85,6 +85,9 @@ NSInteger const kMaxTextCount = 140;
     self.profileImage.clipsToBounds = YES;
     self.profileImage.layer.borderWidth = 1.0f;
     self.profileImage.layer.borderColor = CGColorRetain([UIColor colorWithRed:0.335 green:0.632 blue:0.916 alpha:1.000].CGColor);
+    
+    // Update tweet button status
+    [self updateTweetBtnState];
     
     // Default keyboard on
     [self.tweetTextView becomeFirstResponder];
@@ -123,6 +126,11 @@ NSInteger const kMaxTextCount = 140;
 }
 
 - (void) updateTweetBtnState{
+    NSInteger textLeft = kMaxTextCount - self.tweetTextView.text.length;
+    self.textCount.text = [@(textLeft) stringValue];
+    self.tweetBtn.enabled = (textLeft > 0) && (textLeft < kMaxTextCount);
+    self.textCount.textColor = (textLeft >= 20) ? [UIColor colorWithWhite:0.629 alpha:1.000] : [UIColor redColor];
+    
     if (self.tweetBtn.enabled && self.tweetBtn.image == self.tweetDisableImg) {
         self.tweetBtn.image = self.tweetEnableImg;
     }else if (!self.tweetBtn.enabled && self.tweetBtn.image == self.tweetEnableImg){
@@ -131,11 +139,6 @@ NSInteger const kMaxTextCount = 140;
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
-    NSInteger textLeft = kMaxTextCount - textView.text.length;
-    self.textCount.text = [@(textLeft) stringValue];
-    self.tweetBtn.enabled = (textLeft >= 0) && (textLeft < kMaxTextCount);
-    self.textCount.textColor = (textLeft >= 20) ? [UIColor colorWithWhite:0.629 alpha:1.000] : [UIColor redColor];
-    
     [self updateTweetBtnState];
 }
 

@@ -41,6 +41,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[ComposeTweetViewController textViewDidChange:]:ComposeTweetViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tweetBtn.enabled">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "__34-[LoginViewController viewDidLoad]_block_invoke:LoginViewController.m">
       </ContextState>
       <ContextState

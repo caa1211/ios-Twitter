@@ -93,14 +93,19 @@
     self.profileImage.layer.borderWidth = 1.0f;
     self.profileImage.layer.borderColor = CGColorRetain([UIColor colorWithRed:0.335 green:0.632 blue:0.916 alpha:1.000].CGColor);
     
-    
     // Custom back button
     UIImage *backImg = [Define fontImage:NIKFontAwesomeIconArrowCircleOLeft rgbaValue:0xffffff];
     UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] initWithImage:backImg style:UIBarButtonItemStylePlain target:self action:@selector(onBack)];
-    
     self.navigationItem.leftBarButtonItem = backBtn;
-    //self.navigationItem.rightBarButtonItem = self.tweetBtn;
+    
+    // Custom reply button
+    UIImage *replyImg = [Define fontImage:NIKFontAwesomeIconTwitter rgbaValue:0xffffff];
+    UIBarButtonItem *naviReplyBtn = [[UIBarButtonItem alloc] initWithImage:replyImg style:UIBarButtonItemStylePlain target:self action:@selector(onReply)];
+    self.navigationItem.rightBarButtonItem = naviReplyBtn;
+    
+    // Custom  color or navigation bar
     [self.navigationController.navigationBar setBarTintColor:[[UIColor alloc] initWithRed:0.298 green:0.646 blue:0.920 alpha:1.000]];
+    
     
     // Action Buttons
     self.replyBtn.userInteractionEnabled = YES;
