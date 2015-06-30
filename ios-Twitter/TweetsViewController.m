@@ -16,8 +16,7 @@
 #import "ComposeTweetViewController.h"
 #import "TweetDetailViewController.h"
 
-@interface TweetsViewController () <UITableViewDataSource, UITableViewDelegate,
-ComposeTweetViewControllerDelegate, TweetCellDelegate>
+@interface TweetsViewController () <UITableViewDataSource, UITableViewDelegate, TweetCellDelegate>
 
 //@property (nonatomic, strong) UINavigationController *naviController;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
