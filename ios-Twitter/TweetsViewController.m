@@ -247,7 +247,6 @@ enum {
 - (void)didTapCellReply:(Tweet *)tweet
 {
     ComposeTweetViewController *vc = [[ComposeTweetViewController alloc]initWithUser:self.loginUser andTweet:tweet];
-    vc.delegate = self;
     UINavigationController *nvController = [[UINavigationController alloc]
                                             initWithRootViewController: vc];
     // nvController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
