@@ -134,6 +134,10 @@
     tapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onRemoveTweet)];
     tapped.numberOfTapsRequired = 1;
     [self.removeBtn addGestureRecognizer:tapped];
+    
+    if (![self.loginUser.idStr isEqualToString:self.tweet.user.idStr]) {
+        [self.removeBtn setHidden:YES];
+    }
 }
 
 -(void) onRemoveTweet{
