@@ -14,6 +14,9 @@
 
     self = [super init];
     
+    NSLog(@"===========================");
+ NSLog(@"===============DD============%@",dictionary);
+   NSLog(@"===========================");
     if (self) {
         self.user = [[User alloc] initWithDictionary: dictionary[@"user"]];
         self.text = dictionary[@"text"];
