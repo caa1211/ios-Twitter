@@ -167,8 +167,6 @@ enum {
 
 - (void)onNew {
     ComposeTweetViewController *vc = [[ComposeTweetViewController alloc]initWithUser:self.loginUser];
-    vc.delegate = self;
-    
     UINavigationController *nvController = [[UINavigationController alloc]
                               initWithRootViewController: vc];
     // nvController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
